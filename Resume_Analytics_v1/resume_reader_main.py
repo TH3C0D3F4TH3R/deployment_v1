@@ -43,7 +43,19 @@ def main(file,job_link):
         skills = list(dict.fromkeys(skills).keys())
         
         final_degree = list(set(degree + degree2)) 
+        
+        
         job_data,common_skills,counter = job_posting(job_link,skills)
+        c_skills = list(common_skills)
+        if len(c_skills)==0:
+            c_skills.append('None')
+        requirement_phrase = list(job_data['requirement'])
+        requirement_skills= list(job_data['skill'])
+        if len(requirement_phrase)==0:
+            requirement_skills.append('None')
+            requirement_phrase.append('None')
+                                 
+                                     
         
         output = {
             "num_pages" : num_pages,
@@ -55,8 +67,9 @@ def main(file,job_link):
             "designition": designition,
             "degree": final_degree,
             "skills": skills,
-            "matched_skills": common_skills,
-            "matched_phrase_job": job_data
+            "matched_skills": c_skills,
+            "job_requirement_phrase": requirement_phrase,
+            "Job_skills_requirement":requirement_skills
         }
         with open('output.json','w') as outfile:
             json.dump(output,outfile)

@@ -88,7 +88,7 @@ def job_posting(link,resume_skills):
     counter=0
 
     for skill in resume_skills:
-        if skill.lower() in list(job_data['skill']):
+        if skill.lower().strip() in list(job_data['skill']):
             common_skills.append(skill)
             counter+=1
             

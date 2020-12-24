@@ -1,5 +1,7 @@
 ﻿.NET
 .NET CLR
+ HTML5
+ jQuery
 .NET Compact Framework
 .NET Framework
 .NET Remoting
