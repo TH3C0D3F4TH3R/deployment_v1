@@ -1,15 +1,18 @@
 # from file_reader import read_file
 from data_parser import resumeparse,base_path
 from file_reader import read_file
-from job_posting import job_posting
 import os
 import json
 import re
 import sys
+import job_posting
+from job_posting import job_posting
+from job_data import job_data
 
 def main(file,job_link):
       
         resume_lines,num_pages = read_file(file)
+        num_of_words = len(resume_lines)
         resume_segments = resumeparse.segment(resume_lines)
         
         
@@ -41,24 +44,21 @@ def main(file,job_link):
         if len(skills) == 0:
             skills = resumeparse.extract_skills(full_text)
         skills = list(dict.fromkeys(skills).keys())
+        skills1=[]
+        for skill in skills:
+#             skill2 = ''.join(e for e in skill if e.isalnum())
+            skill2 = re.sub('[^A-Za-z0-9/ /]+', '', skill)
+            skill1 = skill2.upper().strip()
+            skills1.append(skill1)
+        num_skills = len(skills1)
         
         final_degree = list(set(degree + degree2)) 
         
-        
-        job_data,common_skills,counter = job_posting(job_link,skills)
-        c_skills = list(common_skills)
-        if len(c_skills)==0:
-            c_skills.append('None')
-        requirement_phrase = list(job_data['requirement'])
-        requirement_skills= list(job_data['skill'])
-        if len(requirement_phrase)==0:
-            requirement_skills.append('None')
-            requirement_phrase.append('None')
-                                 
-                                     
-        
+        extracted_job_data = job_data(job_link,skills1)
+
         output = {
             "num_pages" : num_pages,
+            "num_of_words":num_of_words,
             "email": email,
             "phone": phone,
             "name": name,
@@ -66,17 +66,12 @@ def main(file,job_link):
             "university": university,
             "designition": designition,
             "degree": final_degree,
-            "skills": skills,
-            "matched_skills": c_skills,
-            "job_requirement_phrase": requirement_phrase,
-            "Job_skills_requirement":requirement_skills
+            "skills": skills1,
+            "number_of_skills":num_skills,
+            "Job_Data": extracted_job_data            
         }
-        with open('output.json','w') as outfile:
-            json.dump(output,outfile)
+#         with open('output.json','w') as outfile:
+#             json.dump(output,outfile)
         return output
     
-if __name__ == '__main__':
-    path = ''.join(sys.argv[1:])
-    print('here ',path)
-    main(path)
     

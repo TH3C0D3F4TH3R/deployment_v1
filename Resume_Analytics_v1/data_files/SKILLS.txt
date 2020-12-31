@@ -1,4 +1,39 @@
-﻿.NET
+GIT
+Anypoint Studio
+SOAP
+REST
+RedHat Fuse
+OpenShift
+AWS
+Azure
+Google Cloud
+Agile
+DevOps
+Apache Camel
+Web Flux
+Spring Boot
+OpenShift
+Docker
+Solace
+React
+Kafka
+Splunk
+AppDynamics
+Apigee
+WINDOWS XP
+WINDOW 7
+WINDOWS 10
+LINUX
+ANDROID STUDIO
+ECLIPSE
+POSTMAN
+KOTLIN
+GIT
+BOOTSTRAP
+ANGULAR
+KENDOUI
+JIRA
+.NET
 .NET CLR
 .NET Compact Framework
 .NET Framework
