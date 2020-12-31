@@ -5,7 +5,6 @@ import os
 import json
 import re
 import sys
-import job_posting
 from job_data import job_data
 
 def main(file,job_link):
