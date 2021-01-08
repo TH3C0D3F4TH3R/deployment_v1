@@ -118,19 +118,37 @@ def job_data(job_link,resume_skill):
             if skill.upper()== res_skill.strip().upper():
                 matched_skill_count+=1
                 matched_skills.append(skill)
+    tech_score = matched_skill_count/num_skills
+    tech_det_dict = {}
+    for i in range(0,len(matched_skills)):
+        temp_dict = {i:{'title':matched_skills[i],'score':100}}
+        tech_det_dict.update(temp_dict)
+        
+    technical_skill = {'score':tech_score,'details':tech_det_dict}
+    
+    key_score = round(matched_skill_count/num_skills)
+    key_det_dict = {}
+    for i in range(0,len(matched_skills)):
+        temp_dict = {i:{'title':matched_skills[i],'score':100}}
+        key_det_dict.update(temp_dict)
+        
+    keywords = {'score':key_score,'details':key_det_dict}
+        
 
     unmatched_skill_count  =  num_skills-matched_skill_count
     output = {
-        "job_title" : Job_Title,
+        "jobRole" : Job_Title,
         "job_type":Job_Type,
-        "posted_by": Posted_By,
+        "companyName": Posted_By,
         "posted_date": Posted_Date,
         "job_skills": final_skills,
         "job_skill_count": word_dict,
         "num_of_job_skills": num_skills,
         "matched_skills":matched_skills,
         "matched_skill_count": matched_skill_count,
-        "unmatched_skill_count":unmatched_skill_count
+        "unmatched_skill_count":unmatched_skill_count,
+        "technicalSkills": technical_skill,
+        "keywords": keywords
         }
     
     return output
